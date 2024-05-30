@@ -48,7 +48,8 @@ function generateHtmlMultiFile(config, contentType, items) {
 
     const processItems = (groupItems, groupDir) => {
         groupItems.forEach((item, index) => {
-            const title = cleanTitle(getTitleOrFilename(item, config.titleAttribute)) || `Item ${index + 1}`;
+            const { attribute: titleAttr, value: titleValue } = getAttribute(item, config.titleAttribute);
+            const title = cleanTitle(titleValue) || `Item ${index + 1}`;
             const filename = generateSlug(cleanTitle(getTitleOrFilename(item, config.filenameAttribute)) || `item_${index + 1}`, MAX_FILENAME_LENGTH);
             const outputPath = path.join(groupDir, `${filename}.html`);
 
@@ -57,7 +58,7 @@ function generateHtmlMultiFile(config, contentType, items) {
             const { attribute: contentAttr, value: content } = getAttribute(item, config.contentAttribute);
 
             const attributes = Object.keys(filteredItem).map(key => {
-                if (key !== contentAttr) {
+                if (key !== contentAttr && key !== titleAttr) {
                     return `${' '.repeat(INDENT_SPACES)}<li><strong>${key}:</strong> ${filteredItem[key] || ''}</li>`;
                 }
                 return '';

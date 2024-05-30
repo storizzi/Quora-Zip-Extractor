@@ -36,10 +36,11 @@ function generateHtmlSingleFile(config, contentType, items) {
     items.forEach((item, index) => {
         const filteredItem = filterItemAttributes(item);
 
+        const { attribute: titleAttr, value: titleValue } = getAttribute(item, config.titleAttribute);
         const { attribute: contentAttr, value: content } = getAttribute(item, config.contentAttribute);
 
         const attributes = Object.keys(filteredItem).map(key => {
-            if (key !== contentAttr) {
+            if (key !== contentAttr && key !== titleAttr) {
                 return `${' '.repeat(INDENT_SPACES)}<li><strong>${key}:</strong> ${filteredItem[key] || ''}</li>`;
             }
             return '';

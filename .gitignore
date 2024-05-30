@@ -1,0 +1,6 @@
+.DS_Store
+/html/
+/images/
+/node_modules/
+*output*.json
+/index.html

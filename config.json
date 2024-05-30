@@ -1,0 +1,114 @@
+{
+  "Answers": {
+    "createSingleFile": false,
+    "createImagesDirectory": true,
+    "subdirectoryName": "answers",
+    "filenameAttribute": "Question",
+    "titleAttribute": "Question",
+    "subdivideBy": null
+  },
+  "Questions": {
+    "createSingleFile": true,
+    "createImagesDirectory": false,
+    "filenameAttribute": "Text",
+    "titleAttribute": "Text",
+    "subdivideBy": null
+  },
+  "Profile Description": {
+    "createSingleFile": true,
+    "createImagesDirectory": false,
+    "filenameAttribute": null,
+    "titleAttribute": null,
+    "subdivideBy": null
+  },
+  "Credentials": {
+    "createSingleFile": true,
+    "createImagesDirectory": false,
+    "subdirectoryName": "credentials",
+    "filenameAttribute": "Experience",
+    "titleAttribute": "Experience",
+    "subdivideBy": null
+  },
+  "Answer Comments": {
+    "createSingleFile": true,
+    "createImagesDirectory": false,
+    "subdirectoryName": "answer comments",
+    "filenameAttribute": "Answer",
+    "titleAttribute": "Answer",
+    "subdivideBy": null
+  },
+  "Question Comments": {
+    "createSingleFile": true,
+    "createImagesDirectory": false,
+    "subdirectoryName": "question comments",
+    "filenameAttribute": "Question",
+    "titleAttribute": "Question",
+    "subdivideBy": null
+  },
+  "Post Comments": {
+    "createSingleFile": true,
+    "createImagesDirectory": false,
+    "subdirectoryName": "post comments",
+    "filenameAttribute": "Post",
+    "titleAttribute": "Post",
+    "subdivideBy": null
+  },
+  "Inbox Messages": {
+    "createSingleFile": true,
+    "createImagesDirectory": false,
+    "subdirectoryName": "inbox messages",
+    "filenameAttribute": "Recipient",
+    "titleAttribute": "Recipient",
+    "subdivideBy": null
+  },
+  "Answer Drafts": {
+    "createSingleFile": false,
+    "createImagesDirectory": true,
+    "subdirectoryName": "answer drafts",
+    "filenameAttribute": "Question",
+    "titleAttribute": "Question",
+    "subdivideBy": null
+  },
+  "Post Drafts": {
+    "createSingleFile": false,
+    "createImagesDirectory": true,
+    "subdirectoryName": "post drafts",
+    "filenameAttribute": "Title",
+    "titleAttribute": "Title",
+    "subdivideBy": null
+  },
+  "Inbox Message Drafts": {
+    "createSingleFile": true,
+    "createImagesDirectory": false,
+    "subdirectoryName": "inbox message drafts",
+    "filenameAttribute": "Users",
+    "titleAttribute": "Users",
+    "subdivideBy": null
+  },
+  "Spaces Items": {
+    "createSingleFile": false,
+    "createImagesDirectory": true,
+    "subdirectoryName": "spaces items",
+    "filenameAttribute": "Share url",
+    "titleAttribute": "Share url",
+    "subdivideBy": "Space name",
+    "contentAttribute": "Post content"
+  },
+  "Profile Photo": {
+    "createSingleFile": true,
+    "createImagesDirectory": true,
+    "subdirectoryName": "profile photo",
+    "filenameAttribute": "Photo",
+    "titleAttribute": "Photo",
+    "subdivideBy": null,
+    "contentAttribute": "Photo"
+  },
+  "Space Submissions": {
+    "createSingleFile": false,
+    "createImagesDirectory": true,
+    "subdirectoryName": "space submissions",
+    "filenameAttribute": "Question",
+    "titleAttribute": "Question",
+    "subdivideBy": "Space name"
+  }
+}

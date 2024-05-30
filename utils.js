@@ -75,11 +75,46 @@ function checkConfigFileExists(configFilePath) {
     }
 }
 
+function cleanTitle(title) {
+    if (typeof title !== 'string') {
+        return title; // Return as-is if not a string
+    }
+    const $ = cheerio.load(title);
+    return $.text();
+}
+
+function getAttribute(item, attribute) {
+    if (Array.isArray(attribute)) {
+        for (let attr of attribute) {
+            if (item[attr]) {
+                return item[attr];
+            }
+        }
+    } else {
+        return item[attribute];
+    }
+    return null;
+}
+
+function getTitleOrFilename(item, attribute) {
+    if (attribute) {
+        const value = getAttribute(item, attribute);
+        if (value) {
+            const titleFromUrl = extractTitleFromUrl(value);
+            return titleFromUrl ? titleFromUrl : value;
+        }
+    }
+    return null;
+}
+
 module.exports = {
     generateSlug,
     extractTitleFromUrl,
     copyImages,
     filterItemAttributes,
     saveDebugJson,
-    checkConfigFileExists
+    checkConfigFileExists,
+    cleanTitle,
+    getAttribute,
+    getTitleOrFilename
 };

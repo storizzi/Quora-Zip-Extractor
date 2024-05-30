@@ -89,10 +89,10 @@
     "createSingleFile": false,
     "createImagesDirectory": true,
     "subdirectoryName": "spaces/items",
-    "filenameAttribute": "Share url",
-    "titleAttribute": "Share url",
-    "subdivideBy": "Space name",
-    "contentAttribute": "Post content"
+    "filenameAttribute": ["Post title","Question","Share url"],
+    "titleAttribute": ["Post title","Question","Share url"],
+    "contentAttribute": ["Post content","Content"],
+    "subdivideBy": "Space name"
   },
   "Profile Photo": {
     "createSingleFile": true,
@@ -106,10 +106,10 @@
   "Space Submissions": {
     "createSingleFile": false,
     "createImagesDirectory": true,
-    "contentAttribute": "Post content",
     "subdirectoryName": "spaces/submissions",
-    "filenameAttribute": "Post title",
-    "titleAttribute": "Post title",
+    "filenameAttribute": ["Post title","Question"],
+    "titleAttribute": ["Post title","Question"],
+    "contentAttribute": ["Post content","Content"],
     "subdivideBy": "Space name"
   }
 }

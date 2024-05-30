@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const mustache = require('mustache');
 const { generateTableRows } = require('./generateTableRows');
-const { generateSlug, copyImages, filterItemAttributes } = require('./utils');
+const { generateSlug, copyImages, filterItemAttributes, cleanTitle, getTitleOrFilename } = require('./utils');
 
 function generateHtmlSingleFile(config, contentType, items) {
     const {
@@ -26,7 +26,7 @@ function generateHtmlSingleFile(config, contentType, items) {
     const outputPath = path.join(typeDir, `${generateSlug(contentType, MAX_FILENAME_LENGTH)}.html`);
     const gridTemplateContent = fs.readFileSync(GRID_TEMPLATE_FILE_PATH, 'utf8');
     const filledTemplate = mustache.render(gridTemplateContent, {
-        title: contentType,
+        title: cleanTitle(contentType),
         tableHeader: tableHeader,
         tableRows: tableRows
     });
@@ -46,7 +46,7 @@ function generateHtmlSingleFile(config, contentType, items) {
         const content = item[config.contentAttribute] || '';
 
         const itemTemplate = mustache.render(gridTemplateContent, {
-            title: contentType,
+            title: cleanTitle(contentType),
             content: content,
             attributes: attributes
         });

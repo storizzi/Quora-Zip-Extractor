@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const mustache = require('mustache');
-const { generateSlug, extractTitleFromUrl } = require('./utils');
+const { generateSlug, extractTitleFromUrl, getTitleOrFilename, cleanTitle } = require('./utils');
 
 function generateIndexFiles(jsonData, config) {
     const {
@@ -73,9 +73,8 @@ function generateIndexFiles(jsonData, config) {
                 itemsGroupedBySection[section].push(item);
             } else {
                 const relativePath = path.relative(contentDir, item.generatedFilename);
-                const title = item[contentConfig.titleAttribute];
-                const displayTitle = title && title.startsWith('http') ? extractTitleFromUrl(title) : (title || relativePath);
-                typeLinks.push(`<li><a href="${relativePath}">${displayTitle}</a></li>`);
+                const title = cleanTitle(getTitleOrFilename(item, contentConfig.titleAttribute));
+                typeLinks.push(`<li><a href="${relativePath}">${title}</a></li>`);
             }
         });
 
@@ -97,9 +96,8 @@ function generateIndexFiles(jsonData, config) {
 
             const sectionLinks = itemsGroupedBySection[section].map(item => {
                 const relativePath = path.relative(sectionDir, item.generatedFilename);
-                const title = item[contentConfig.titleAttribute];
-                const displayTitle = title && title.startsWith('http') ? extractTitleFromUrl(title) : (title || relativePath);
-                return `<li><a href="${relativePath}">${displayTitle}</a></li>`;
+                const title = cleanTitle(getTitleOrFilename(item, contentConfig.titleAttribute));
+                return `<li><a href="${relativePath}">${title}</a></li>`;
             }).join('\n');
 
             const sectionIndexContent = mustache.render(indexTemplateContent, {

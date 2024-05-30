@@ -5,7 +5,9 @@ const {
     generateSlug,
     extractTitleFromUrl,
     copyImages,
-    filterItemAttributes
+    filterItemAttributes,
+    cleanTitle,
+    getTitleOrFilename
 } = require('./utils');
 
 function generateHtmlMultiFile(config, contentType, items) {
@@ -45,8 +47,8 @@ function generateHtmlMultiFile(config, contentType, items) {
 
     const processItems = (groupItems, groupDir) => {
         groupItems.forEach((item, index) => {
-            const title = getTitleOrFilename(item, config.titleAttribute) || `Item ${index + 1}`;
-            const filename = generateSlug(getTitleOrFilename(item, config.filenameAttribute) || `item_${index + 1}`, MAX_FILENAME_LENGTH);
+            const title = cleanTitle(getTitleOrFilename(item, config.titleAttribute)) || `Item ${index + 1}`;
+            const filename = generateSlug(cleanTitle(getTitleOrFilename(item, config.filenameAttribute)) || `item_${index + 1}`, MAX_FILENAME_LENGTH);
             const outputPath = path.join(groupDir, `${filename}.html`);
 
             const filteredItem = filterItemAttributes(item);
@@ -91,14 +93,6 @@ function generateHtmlMultiFile(config, contentType, items) {
     }
 
     return items;
-}
-
-function getTitleOrFilename(item, attribute) {
-    if (item[attribute]) {
-        const titleFromUrl = extractTitleFromUrl(item[attribute]);
-        return titleFromUrl ? titleFromUrl : item[attribute];
-    }
-    return null;
 }
 
 module.exports = generateHtmlMultiFile;

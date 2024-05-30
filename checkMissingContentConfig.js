@@ -1,6 +1,4 @@
-const config = require('./config');
-
-function checkMissingContentConfig(jsonData) {
+function checkMissingContentConfig(jsonData, config) {
     const missingConfigs = Object.keys(jsonData).filter(contentType => !config[contentType]);
 
     if (missingConfigs.length > 0) {

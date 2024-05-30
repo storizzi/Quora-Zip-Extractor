@@ -52,13 +52,13 @@ function generateHtmlMultiFile(config, contentType, items) {
             const filteredItem = filterItemAttributes(item);
 
             const attributes = Object.keys(filteredItem).map(key => {
-                if (key !== 'Content') {
+                if (key !== config.contentAttribute) {
                     return `${' '.repeat(INDENT_SPACES)}<li><strong>${key}:</strong> ${filteredItem[key] || ''}</li>`;
                 }
                 return '';
             }).join('\n');
 
-            const content = item.Content || '';
+            const content = item[config.contentAttribute] || '';
 
             const filledTemplate = mustache.render(templateContent, {
                 title: title,
@@ -73,7 +73,7 @@ function generateHtmlMultiFile(config, contentType, items) {
             item.outputURL = itemUrl;
 
             if (config.createImagesDirectory) {
-                copyImages(content, imagesDir, config.ENCODED_JSON_FILE_PATH);
+                copyImages(content, imagesDir);
             }
         });
     };

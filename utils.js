@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const cheerio = require('cheerio');
 
 function generateSlug(text, maxLength) {
     return text.toString().toLowerCase()
@@ -16,16 +17,42 @@ function extractTitleFromUrl(url) {
         const urlObject = new URL(url);
         const pathName = urlObject.pathname;
         const segments = pathName.split('/');
-        return segments[segments.length - 1].replace(/-/g, ' ');
+        const lastSegment = segments[segments.length - 1];
+        const title = lastSegment.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+        return title;
     } catch (error) {
         // If the input is not a valid URL, return the original string
         return url;
     }
 }
 
-function copyImages(content, imagesDir, jsonFilePath) {
-    // Logic to copy images based on content
-    // You can customize this function based on how images are referenced in your content
+function copyImages(content, imagesDir) {
+    const $ = cheerio.load(content);
+    const images = $('img');
+
+    if (!fs.existsSync(imagesDir)) {
+        fs.mkdirSync(imagesDir, { recursive: true });
+    }
+
+    images.each((i, img) => {
+        const src = $(img).attr('src');
+        if (src) {
+            const filename = path.basename(src);
+            const srcPath = path.join(process.cwd(), 'images', filename);
+            const destPath = path.join(imagesDir, filename);
+
+            try {
+                if (fs.existsSync(srcPath)) {
+                    fs.copyFileSync(srcPath, destPath);
+                    console.log(`Copied image: ${srcPath} to ${destPath}`);
+                } else {
+                    console.error(`Image not found: ${srcPath}`);
+                }
+            } catch (error) {
+                console.error(`Failed to copy image: ${srcPath}`, error);
+            }
+        }
+    });
 }
 
 function filterItemAttributes(item) {

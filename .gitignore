@@ -2,5 +2,6 @@
 /html/
 /images/
 /node_modules/
-*output*.json
+output.json
+debug*.json
 /index.html

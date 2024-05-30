@@ -88,7 +88,7 @@
   "Spaces Items": {
     "createSingleFile": false,
     "createImagesDirectory": true,
-    "subdirectoryName": "spaces items",
+    "subdirectoryName": "spaces/items",
     "filenameAttribute": "Share url",
     "titleAttribute": "Share url",
     "subdivideBy": "Space name",
@@ -106,9 +106,10 @@
   "Space Submissions": {
     "createSingleFile": false,
     "createImagesDirectory": true,
-    "subdirectoryName": "space submissions",
-    "filenameAttribute": "Question",
-    "titleAttribute": "Question",
+    "contentAttribute": "Post content",
+    "subdirectoryName": "spaces/submissions",
+    "filenameAttribute": "Post title",
+    "titleAttribute": "Post title",
     "subdivideBy": "Space name"
   }
 }

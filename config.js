@@ -1,3 +1,4 @@
+const fs = require('fs');
 require('dotenv').config();
 
 const config = {
@@ -7,9 +8,12 @@ const config = {
     CONFIG_FILE_PATH: process.env.CONFIG_FILE_PATH || './config.json',
     TEMPLATE_FILE_PATH: process.env.TEMPLATE_FILE_PATH || './template.html',
     GRID_TEMPLATE_FILE_PATH: process.env.GRID_TEMPLATE_FILE_PATH || './grid_template.html',
+    INDEX_TEMPLATE_FILE_PATH: process.env.INDEX_TEMPLATE_FILE_PATH || './indexTemplate.html',
     OUTPUT_DIR: process.env.OUTPUT_DIR || 'html',
     MAX_FILENAME_LENGTH: parseInt(process.env.MAX_FILENAME_LENGTH, 10) || 50,
     INDENT_SPACES: parseInt(process.env.INDENT_SPACES, 10) || 8
 };
 
-module.exports = config;
+const configData = JSON.parse(fs.readFileSync(config.CONFIG_FILE_PATH, 'utf8'));
+
+module.exports = { ...config, ...configData };

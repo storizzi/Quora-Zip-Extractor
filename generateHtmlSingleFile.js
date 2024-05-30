@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const mustache = require('mustache');
 const { generateTableRows } = require('./generateTableRows');
-const { generateSlug, copyImages, filterItemAttributes, cleanTitle, getTitleOrFilename } = require('./utils');
+const { generateSlug, copyImages, filterItemAttributes, cleanTitle, getAttribute, getTitleOrFilename } = require('./utils');
 
 function generateHtmlSingleFile(config, contentType, items) {
     const {
@@ -36,18 +36,18 @@ function generateHtmlSingleFile(config, contentType, items) {
     items.forEach((item, index) => {
         const filteredItem = filterItemAttributes(item);
 
+        const { attribute: contentAttr, value: content } = getAttribute(item, config.contentAttribute);
+
         const attributes = Object.keys(filteredItem).map(key => {
-            if (key !== config.contentAttribute) {
+            if (key !== contentAttr) {
                 return `${' '.repeat(INDENT_SPACES)}<li><strong>${key}:</strong> ${filteredItem[key] || ''}</li>`;
             }
             return '';
-        }).join('\n');
-
-        const content = item[config.contentAttribute] || '';
+        }).filter(attr => attr !== '').join('\n');
 
         const itemTemplate = mustache.render(gridTemplateContent, {
             title: cleanTitle(contentType),
-            content: content,
+            content: content || '',
             attributes: attributes
         });
 

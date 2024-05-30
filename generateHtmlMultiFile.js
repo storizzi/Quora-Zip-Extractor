@@ -7,6 +7,7 @@ const {
     copyImages,
     filterItemAttributes,
     cleanTitle,
+    getAttribute,
     getTitleOrFilename
 } = require('./utils');
 
@@ -53,18 +54,18 @@ function generateHtmlMultiFile(config, contentType, items) {
 
             const filteredItem = filterItemAttributes(item);
 
+            const { attribute: contentAttr, value: content } = getAttribute(item, config.contentAttribute);
+
             const attributes = Object.keys(filteredItem).map(key => {
-                if (key !== config.contentAttribute) {
+                if (key !== contentAttr) {
                     return `${' '.repeat(INDENT_SPACES)}<li><strong>${key}:</strong> ${filteredItem[key] || ''}</li>`;
                 }
                 return '';
-            }).join('\n');
-
-            const content = item[config.contentAttribute] || '';
+            }).filter(attr => attr !== '').join('\n');
 
             const filledTemplate = mustache.render(templateContent, {
                 title: title,
-                content: content,
+                content: content || '',
                 attributes: attributes
             });
             fs.writeFileSync(outputPath, filledTemplate, 'utf8');

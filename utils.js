@@ -27,6 +27,10 @@ function extractTitleFromUrl(url) {
 }
 
 function copyImages(content, imagesDir) {
+    if (typeof content !== 'string') {
+        return; // Exit if content is not a string
+    }
+    
     const $ = cheerio.load(content);
     const images = $('img');
 
@@ -87,22 +91,20 @@ function getAttribute(item, attribute) {
     if (Array.isArray(attribute)) {
         for (let attr of attribute) {
             if (item[attr]) {
-                return item[attr];
+                return { attribute: attr, value: item[attr] };
             }
         }
     } else {
-        return item[attribute];
+        return { attribute, value: item[attribute] };
     }
-    return null;
+    return { attribute: null, value: null };
 }
 
 function getTitleOrFilename(item, attribute) {
-    if (attribute) {
-        const value = getAttribute(item, attribute);
-        if (value) {
-            const titleFromUrl = extractTitleFromUrl(value);
-            return titleFromUrl ? titleFromUrl : value;
-        }
+    const { value } = getAttribute(item, attribute);
+    if (value) {
+        const titleFromUrl = extractTitleFromUrl(value);
+        return titleFromUrl ? titleFromUrl : value;
     }
     return null;
 }

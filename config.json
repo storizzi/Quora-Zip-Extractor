@@ -5,21 +5,24 @@
     "subdirectoryName": "answers",
     "filenameAttribute": "Question",
     "titleAttribute": "Question",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Questions": {
     "createSingleFile": true,
     "createImagesDirectory": false,
     "filenameAttribute": "Text",
     "titleAttribute": "Text",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Profile Description": {
     "createSingleFile": true,
     "createImagesDirectory": false,
     "filenameAttribute": null,
     "titleAttribute": null,
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Credentials": {
     "createSingleFile": true,
@@ -27,7 +30,8 @@
     "subdirectoryName": "credentials",
     "filenameAttribute": "Experience",
     "titleAttribute": "Experience",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Answer Comments": {
     "createSingleFile": true,
@@ -35,7 +39,8 @@
     "subdirectoryName": "answer comments",
     "filenameAttribute": "Answer",
     "titleAttribute": "Answer",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Question Comments": {
     "createSingleFile": true,
@@ -43,7 +48,8 @@
     "subdirectoryName": "question comments",
     "filenameAttribute": "Question",
     "titleAttribute": "Question",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Post Comments": {
     "createSingleFile": true,
@@ -51,7 +57,8 @@
     "subdirectoryName": "post comments",
     "filenameAttribute": "Post",
     "titleAttribute": "Post",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Inbox Messages": {
     "createSingleFile": true,
@@ -59,7 +66,8 @@
     "subdirectoryName": "inbox messages",
     "filenameAttribute": "Recipient",
     "titleAttribute": "Recipient",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Answer Drafts": {
     "createSingleFile": false,
@@ -67,7 +75,8 @@
     "subdirectoryName": "answer drafts",
     "filenameAttribute": "Question",
     "titleAttribute": "Question",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Post Drafts": {
     "createSingleFile": false,
@@ -75,7 +84,8 @@
     "subdirectoryName": "post drafts",
     "filenameAttribute": "Title",
     "titleAttribute": "Title",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Inbox Message Drafts": {
     "createSingleFile": true,
@@ -83,7 +93,8 @@
     "subdirectoryName": "inbox message drafts",
     "filenameAttribute": "Users",
     "titleAttribute": "Users",
-    "subdivideBy": null
+    "subdivideBy": null,
+    "contentAttribute": "Content"
   },
   "Spaces Items": {
     "createSingleFile": false,

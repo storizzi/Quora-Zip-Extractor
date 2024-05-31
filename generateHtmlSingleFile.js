@@ -22,7 +22,14 @@ function generateHtmlSingleFile(config, contentType, items) {
         fs.mkdirSync(imagesDir);
     }
 
-    const { tableHeader, tableRows } = generateTableRows(items);
+    // Filter out the 'Content type' attribute from items for table generation
+    const filteredItems = items.map(item => {
+        const newItem = { ...item };
+        delete newItem['Content type'];
+        return newItem;
+    });
+
+    const { tableHeader, tableRows } = generateTableRows(filteredItems);
     const outputPath = path.join(typeDir, `${generateSlug(contentType, MAX_FILENAME_LENGTH)}.html`);
     const gridTemplateContent = fs.readFileSync(GRID_TEMPLATE_FILE_PATH, 'utf8');
     const filledTemplate = mustache.render(gridTemplateContent, {
@@ -40,14 +47,14 @@ function generateHtmlSingleFile(config, contentType, items) {
         const { attribute: contentAttr, value: content } = getAttribute(item, config.contentAttribute);
 
         const attributes = Object.keys(filteredItem).map(key => {
-            if (key !== contentAttr && key !== titleAttr) {
+            if (key !== contentAttr && key !== titleAttr && key !== 'Content type') {
                 return `${' '.repeat(INDENT_SPACES)}<li><strong>${key}:</strong> ${filteredItem[key] || ''}</li>`;
             }
             return '';
         }).filter(attr => attr !== '').join('\n');
 
         const itemTemplate = mustache.render(gridTemplateContent, {
-            title: cleanTitle(contentType),
+            title: cleanTitle(titleValue),
             content: content || '',
             attributes: attributes
         });

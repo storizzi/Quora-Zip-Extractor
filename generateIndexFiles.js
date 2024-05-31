@@ -12,7 +12,6 @@ function generateIndexFiles(jsonData, config) {
 
     const indexTemplateContent = fs.readFileSync(INDEX_TEMPLATE_FILE_PATH, 'utf8');
 
-    // Generate the main index.html in the OUTPUT_DIR directory
     const mainLinks = Object.keys(jsonData).map(contentType => {
         const contentConfig = config[contentType];
         if (!contentConfig) {
@@ -33,7 +32,6 @@ function generateIndexFiles(jsonData, config) {
         }
     }).filter(link => link !== '').join('\n');
 
-    // Include a link to the original index.html in the parent directory
     const parentIndexLink = `<li><a href="../index.html">Original Quora Backup index.html</a></li><hr>`;
     const mainIndexContent = mustache.render(indexTemplateContent, {
         title: 'Table of Contents',
@@ -43,7 +41,6 @@ function generateIndexFiles(jsonData, config) {
     fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), mainIndexContent, 'utf8');
     if (DEBUG) console.log(`Saved: ${path.join(OUTPUT_DIR, 'index.html')}`);
 
-    // Generate index.html for each content type
     Object.keys(jsonData).forEach(contentType => {
         const contentConfig = config[contentType];
         if (!contentConfig) {
@@ -86,12 +83,11 @@ function generateIndexFiles(jsonData, config) {
         fs.writeFileSync(path.join(contentDir, 'index.html'), typeIndexContent, 'utf8');
         if (DEBUG) console.log(`Saved: ${path.join(contentDir, 'index.html')}`);
 
-        // Generate index.html for each section if subdivided
         Object.keys(itemsGroupedBySection).forEach(section => {
             const sectionDir = path.join(contentDir, generateSlug(section, config.MAX_FILENAME_LENGTH));
 
             if (!fs.existsSync(sectionDir)) {
-                fs.mkdirSync(sectionDir, { recursive: true });
+                fs.mkdirSync(sectionDir);
             }
 
             const sectionLinks = itemsGroupedBySection[section].map(item => {
@@ -108,11 +104,9 @@ function generateIndexFiles(jsonData, config) {
             fs.writeFileSync(path.join(sectionDir, 'index.html'), sectionIndexContent, 'utf8');
             if (DEBUG) console.log(`Saved: ${path.join(sectionDir, 'index.html')}`);
 
-            // Add link to the section in the main type index file
             typeLinks.push(`<li><a href="${generateSlug(section, config.MAX_FILENAME_LENGTH)}/index.html">${section}</a></li>`);
         });
 
-        // Update type index file with section links
         const updatedTypeIndexContent = mustache.render(indexTemplateContent, {
             title: `${contentType} - Table of Contents`,
             links: typeLinks.join('\n')

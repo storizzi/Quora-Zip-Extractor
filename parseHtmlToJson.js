@@ -20,7 +20,7 @@ function parseHtmlToJson(config) {
             if ($(el).is('h2')) {
                 currentSection = {};
                 jsonData[contentType].push(currentSection);
-                currentSection['title'] = $(el).text().trim();
+                currentSection['Content type'] = $(el).text().trim(); // Rename 'title' to 'Content type'
             } else if ($(el).is('div') && currentSection) {
                 const key = $(el).find('strong').text().replace(':', '').trim();
                 const valueElement = $(el).find('strong').next();

@@ -1,7 +1,8 @@
 function generateTableRows(items) {
     if (!items.length) return { tableHeader: '', tableRows: '' };
 
-    const keys = Object.keys(items[0]);
+    const keys = Object.keys(items[0]).filter(key => key !== 'Content type'); // Exclude 'Content type'
+
     const tableHeader = keys.map(key => `<th>${key}</th>`).join('');
     const tableRows = items.map((item, index) => {
         const row = keys.map(key => `<td>${item[key] || ''}</td>`).join('');

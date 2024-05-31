@@ -49,7 +49,8 @@ function generateHtmlMultiFile(config, contentType, items) {
     const processItems = (groupItems, groupDir) => {
         groupItems.forEach((item, index) => {
             const { attribute: titleAttr, value: titleValue } = getAttribute(item, config.titleAttribute);
-            const title = cleanTitle(titleValue) || `Item ${index + 1}`;
+            const extractedTitle = extractTitleFromUrl(titleValue);
+            const cleanedTitle = cleanTitle(extractedTitle) || cleanTitle(titleValue) || `Item ${index + 1}`;
             const filename = generateSlug(cleanTitle(getTitleOrFilename(item, config.filenameAttribute)) || `item_${index + 1}`, MAX_FILENAME_LENGTH);
             const outputPath = path.join(groupDir, `${filename}.html`);
 
@@ -60,12 +61,15 @@ function generateHtmlMultiFile(config, contentType, items) {
             const attributes = Object.keys(filteredItem).map(key => {
                 if (key !== contentAttr && key !== titleAttr) {
                     return `${' '.repeat(INDENT_SPACES)}<li><strong>${key}:</strong> ${filteredItem[key] || ''}</li>`;
+                } else if (key === titleAttr && cleanedTitle !== titleValue) {
+                    // If the cleaned title is different from the raw titleValue, include it in the list
+                    return `${' '.repeat(INDENT_SPACES)}<li><strong>${key}:</strong> ${filteredItem[key] || ''}</li>`;
                 }
                 return '';
             }).filter(attr => attr !== '').join('\n');
 
             const filledTemplate = mustache.render(templateContent, {
-                title: title,
+                title: cleanedTitle,
                 content: content || '',
                 attributes: attributes
             });

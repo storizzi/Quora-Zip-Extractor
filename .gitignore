@@ -1,7 +1,7 @@
 .DS_Store
-/html/
-/images/
-/node_modules/
+/html
+/images
+/node_modules
 output.json
 debug*.json
 /index.html

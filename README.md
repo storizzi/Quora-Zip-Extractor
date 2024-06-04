@@ -49,18 +49,22 @@ npm install -g git+https://github.com/storizzi/Quora-Zip-Extractor.git
 
 ### Prepare Your Environment
 
-Ensure you have a `.env` file in the root of your project directory if you need to customize the defaults. The `.env` file can include the following environment variables:
+Ensure you have a `.env` file in the root of your project directory if you need to customize the defaults. The `.env` file can include any of the following environment variables (shown here with their default values):
 
 ```plaintext
 OUTPUT_DIR=html
 CONFIG_FILE_PATH=config.json
-INPUT_FILE_PATH=path/to/your/quora_export.html
+INPUT_FILE_PATH=./index.html
+OUTPUT_JSON_FILE_PATH=./output.json
+ENCODED_JSON_FILE_PATH=./encoded_output.json
+TEMPLATE_FILE_PATH=./templates/template.html
+GRID_TEMPLATE_FILE_PATH=./templates/grid_template.html
+INDEX_TEMPLATE_FILE_PATH=./templates/indexTemplate.html
+MAX_FILENAME_LENGTH=50
+INDENT_SPACES=8
+DEBUG=true
+GENERATE_INDEX_FILES=true
 ```
-
-If the `.env` file is not present, the tool will use the following defaults:
-- **OUTPUT_DIR**: `html` (inside the current directory)
-- **CONFIG_FILE_PATH**: `config.json` (from the source code directory if not found in the current working directory)
-- **INPUT_FILE_PATH**: `index.html` (in the current directory)
 
 ### Running the Command
 
@@ -83,14 +87,6 @@ The results will be stored in the `html` directory (or the directory specified i
 ```sh
 open html/index.html
 ```
-
-## Environment Variables
-
-- **OUTPUT_DIR**: Directory where the output files will be saved.
-- **CONFIG_FILE_PATH**: Path to the JSON configuration file.
-- **INPUT_FILE_PATH**: Path to the Quora HTML export file.
-
-Ensure these variables are correctly set in your `.env` file to match your project's structure. If the `.env` file is not present, the tool will use the default values as mentioned above.
 
 ## Note
 

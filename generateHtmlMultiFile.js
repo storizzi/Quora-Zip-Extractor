@@ -24,11 +24,6 @@ function generateHtmlMultiFile(config, contentType, items) {
         fs.mkdirSync(typeDir, { recursive: true });
     }
 
-    const imagesDir = path.join(typeDir, 'images');
-    if (config.createImagesDirectory && !fs.existsSync(imagesDir)) {
-        fs.mkdirSync(imagesDir);
-    }
-
     const templateContent = fs.readFileSync(TEMPLATE_FILE_PATH, 'utf8');
 
     const itemsGroupedBySection = {};
@@ -81,7 +76,7 @@ function generateHtmlMultiFile(config, contentType, items) {
             item.outputURL = itemUrl;
 
             if (config.createImagesDirectory) {
-                copyImages(content, imagesDir);
+                copyImages(content, path.join(groupDir, 'images'));
             }
         });
     };

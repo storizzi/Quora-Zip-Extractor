@@ -34,19 +34,18 @@ function copyImages(content, imagesDir) {
     const $ = cheerio.load(content);
     const images = $('img');
 
-    if (!fs.existsSync(imagesDir)) {
-        fs.mkdirSync(imagesDir, { recursive: true });
-    }
-
     images.each((i, img) => {
         const src = $(img).attr('src');
-        if (src) {
+        if (src && !/^https?:\/\//.test(src)) { // Check if src is a relative URL
             const filename = path.basename(src);
-            const srcPath = path.join(process.cwd(), 'images', filename);
-            const destPath = path.join(imagesDir, filename);
+            const srcPath = path.join(process.cwd(), 'images', filename); // Source image path
+            const destPath = path.join(imagesDir, filename); // Destination image path
 
             try {
                 if (fs.existsSync(srcPath)) {
+                    if (!fs.existsSync(imagesDir)) {
+                        fs.mkdirSync(imagesDir, { recursive: true }); // Create directory only if the image exists
+                    }
                     fs.copyFileSync(srcPath, destPath);
                     console.log(`Copied image: ${srcPath} to ${destPath}`);
                 } else {

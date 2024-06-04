@@ -14,13 +14,20 @@ To get your Quora data, follow these steps:
 3. Submit your request.
 4. Within a few days, you should receive a zip file named something like `content_<Your_Name>.zip`.
 
+where <Your_Name> is typically your first and last names separated by an underscore.
+
 ## Unzipping the Backup File
 
 After downloading the zip file, unzip it using the following command from the Terminal - e.g.:
 ```sh
 cd ~/Downloads
-unzip content_<Your_Name>.zip
+mkdir content_<Your_Name>
+cd content_<Your_Name>
+unzip ../content_<Your_Name>.zip
 ```
+
+or just double-click on the zip file from Finder - it should extract it into this directory automatically.
+
 This will extract an HTML file and an `images` directory.
 
 ## Installation
@@ -75,11 +82,6 @@ The results will be stored in the `html` directory (or the directory specified i
 
 ```sh
 open html/index.html
-```
-
-On Windows, use:
-```sh
-start html/index.html
 ```
 
 ## Environment Variables

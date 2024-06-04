@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env node
 
 const fs = require('fs');
 const config = require('./config');

@@ -16,8 +16,9 @@ To get your Quora data, follow these steps:
 
 ## Unzipping the Backup File
 
-After downloading the zip file, unzip it using the following command:
+After downloading the zip file, unzip it using the following command from the Terminal - e.g.:
 ```sh
+cd ~/Downloads
 unzip content_<Your_Name>.zip
 ```
 This will extract an HTML file and an `images` directory.
